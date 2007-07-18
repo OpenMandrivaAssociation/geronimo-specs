@@ -56,7 +56,7 @@ Patch0:         geronimo-specs-1.0-jacc.patch
 
 Name:           geronimo-specs
 Version:        1.0
-Release:        %mkrel 3.6
+Release:        %mkrel 3.7
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -98,13 +98,13 @@ BuildRequires:  velocity
 BuildRequires:  ws-scout 
 BuildRequires:  xmlbeans 
 %endif
-BuildRequires:  xml-commons-resolver
+BuildRequires:  xml-commons-resolver12
 
 Requires:       mx4j >= 0:2.0.1
 %if 0
 Requires:       xmlbeans 
 %endif
-Requires:       xml-commons-resolver
+Requires:       xml-commons-resolver12
 
 # The main package has links to all specs, so it requires all subpackages
 # except j2ee-schema (not linked) and javadocs
