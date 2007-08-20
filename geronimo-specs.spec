@@ -153,8 +153,8 @@ Summary:        J2EE JAF v1.0.2 API
 Group:          Development/Java
 Provides:       jaf = 0:1.0.2
 Obsoletes:      jaf
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-jaf-1.0.2-api
 Java Activation Framework
@@ -173,8 +173,8 @@ Summary:        J2EE EJB v2.1 API
 Group:          Development/Java
 Provides:       ejb = 0:2.1
 Obsoletes:      ejb
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-ejb-2.1-api
 Enterprise JavaBeans Specification
@@ -193,8 +193,8 @@ Summary:        J2EE Connector v1.5 API
 Group:          Development/Java
 Provides:       j2ee-connector = 0:1.5
 Obsoletes:      j2ee-connector
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-j2ee-connector-1.5-api
 J2EE Connector Architecture Specification
@@ -204,8 +204,8 @@ Summary:        J2EE Deployment v1.1 API
 Group:          Development/Java
 Provides:       j2ee-deployment = 0:1.1
 Obsoletes:      j2ee-deployment
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-j2ee-deployment-1.1-api
 J2EE Application Deployment Specification
@@ -215,8 +215,8 @@ Summary:        J2EE JACC v1.0 API
 Group:          Development/Java
 #Provides:      geronimo-jacc-1.0-api
 Provides:       jacc = 0:1.0
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-jacc-1.0-api
 Java Authorization Contract for Containers Specification
@@ -226,8 +226,8 @@ Summary:        J2EE Management v1.0 API
 Group:          Development/Java
 Provides:       j2ee-management = 0:1.0
 Obsoletes:      j2ee-management
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-j2ee-management-1.0-api
 J2EE Application Management Specification
@@ -251,8 +251,8 @@ Group:          Development/Java
 Provides:       jaxr = 0:1.0
 Provides:       jaxr-api
 Obsoletes:      jaxr-api
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-jaxr-1.0-api
 Java API for XML Registries (JAXR)
@@ -262,8 +262,8 @@ Java API for XML Registries (JAXR)
 Summary:        J2EE JAXRPC v1.1 API
 Group:          Development/Java
 Provides:       jaxrpc = 0:1.1
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-jaxrpc-1.1-api
 Java API for XML-Based RPC (JAXRPC)
@@ -273,8 +273,8 @@ Summary:        J2EE JMS v1.1 API
 Group:          Development/Java
 Provides:       jms = 0:1.1
 Obsoletes:      jms
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post):  /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post):  update-alternatives
 
 %description -n geronimo-jms-1.1-api
 JMS Specification
@@ -283,8 +283,8 @@ JMS Specification
 Summary:        J2EE JSP v2.0 API
 Group:          Development/Java
 Provides:       jsp = 0:2.0
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-jsp-2.0-api
 JavaServer Pages Specification
@@ -294,8 +294,8 @@ Summary:        J2EE JTA v1.0.1B API
 Group:          Development/Java
 Provides:       jta = 0:1.0.1B
 Obsoletes:      jta
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-jta-1.0.1B-api
 Java Transaction API Specification
@@ -312,8 +312,8 @@ javax.xml.namespace.QName API
 Summary:        J2EE SAAJ v1.1 API
 Group:          Development/Java
 Provides:       saaj = 0:1.1
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-saaj-1.1-api
 SOAP with Attachments API for Java (SAAJ)
@@ -322,8 +322,8 @@ SOAP with Attachments API for Java (SAAJ)
 Summary:        J2EE Servlet v2.4 API
 Group:          Development/Java
 Provides:       servlet = 0:2.4
-Requires(preun): /usr/sbin/update-alternatives
-Requires(post): /usr/sbin/update-alternatives
+Requires(preun): update-alternatives
+Requires(post): update-alternatives
 
 %description -n geronimo-servlet-2.4-api
 J2EE Servlet v2.4 API
