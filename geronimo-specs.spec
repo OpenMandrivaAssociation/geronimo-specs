@@ -56,7 +56,7 @@ Patch0:         geronimo-specs-1.0-jacc.patch
 
 Name:           geronimo-specs
 Version:        1.0
-Release:        %mkrel 3.7
+Release:        %mkrel 3.8
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
