@@ -56,7 +56,7 @@ Patch0:         geronimo-specs-1.0-jacc.patch
 
 Name:           geronimo-specs
 Version:        1.0
-Release:        %mkrel 3.8
+Release:        %mkrel 3.8.0
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -87,9 +87,9 @@ BuildRequires:  jakarta-commons-jelly-tags-xml
 BuildRequires:  forehead
 BuildRequires:  saxon-scripts
 %endif
+%if 0
 BuildRequires:  mockobjects >= 0:0.09
 BuildRequires:  mockobjects-jdk1.4 >= 0:0.09
-%if 0
 BuildRequires:  mockobjects-jdk1.4-j2ee1.3 >= 0:0.09
 %endif
 BuildRequires:  mx4j >= 0:2.0.1
