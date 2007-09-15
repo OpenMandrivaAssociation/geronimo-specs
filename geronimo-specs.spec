@@ -56,15 +56,13 @@ Patch0:         geronimo-specs-1.0-jacc.patch
 
 Name:           geronimo-specs
 Version:        1.0
-Release:        %mkrel 3.8.0
+Release:        %mkrel 3.8.1
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
 #Vendor:        JPackage Project
 #Distribution:  JPackage
 %if %{gcj_support}
-Requires(post): java-gcj-compat
-Requires(postun): java-gcj-compat
 BuildRequires:  java-gcj-compat-devel
 %else
 BuildArch:      noarch
