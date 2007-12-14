@@ -28,7 +28,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-%define gcj_support 1 
+%define gcj_support 1
+#needed because mojo-maven2-plugin-idlj is in contrib and geronimo in main 
+%define with_corba 0
 
 %define _without_tests 1
 %define without_tests %{?_without_tests:1}%{!?_without_tests:0}
@@ -59,6 +61,7 @@ Patch3:        geronimo-jaxr-noscout-pom.patch
 Patch4:        geronimo-nomockobjects-noscout-pom.patch
 Patch5:        geronimo-jms-nomockobjects-pom.patch
 Patch6:        geronimo-corba-jacorb-pom.patch
+Patch7:	       geronimo-specs-nocorba-pom.patch
 
 BuildRequires:  jpackage-utils >= 0:1.7.2
 BuildRequires:  java-1.7.0-icedtea
@@ -76,7 +79,9 @@ BuildRequires:  maven2-plugin-one
 BuildRequires:  maven2-plugin-resources
 BuildRequires:  maven2-plugin-surefire
 BuildRequires:  excalibur-avalon-logkit
+%if %{with_corba}
 BuildRequires:  mojo-maven2-plugin-idlj
+%endif
 #BuildRequires:  jacorb >= 0:2.2.3
 %if %{with_tests}
 BuildRequires:  junit >= 0:3.8.1
@@ -96,9 +101,11 @@ Requires:  avalon-logkit
 # except j2ee-schema (not linked) and javadocs
 Requires: geronimo-commonj-1.1-apis = %{version}-%{release}
 Requires: geronimo-jaf-1.0.2-api = %{version}-%{release}
+%if %{with_corba}
 Requires: geronimo-corba-1.0-apis = %{version}-%{release}
 Requires: geronimo-corba-2.3-apis = %{version}-%{release}
 Requires: geronimo-corba-3.0-apis = %{version}-%{release}
+%endif
 Requires: geronimo-ejb-2.1-api = %{version}-%{release}
 Requires: geronimo-j2ee-1.4-apis = %{version}-%{release}
 Requires: geronimo-j2ee-connector-1.5-api = %{version}-%{release}
@@ -158,6 +165,7 @@ Requires(post): update-alternatives
 %description -n geronimo-jaf-1.0.2-api
 Java Activation Framework
 
+%if %{with_corba}
 %package -n geronimo-corba-1.0-apis
 Summary:        CORBA v1.0 APIs
 Group:          Development/Java
@@ -181,6 +189,7 @@ Requires:       %{name}-poms = %{epoch}:%{version}-%{release}
 
 %description -n geronimo-corba-3.0-apis
 CORBA 3.0 Spec
+%endif
 
 %package -n geronimo-ejb-2.1-api
 Summary:        J2EE EJB v2.1 API
@@ -379,6 +388,9 @@ ln -s %{_javadir} external_repo/JPP
 %patch4 -b .sav2
 %patch5 -b .sav
 #%patch6 -b .sav
+%if !%{with_corba}
+%patch7 -b .sav3
+%endif
 
 %build
 export JAVA_HOME=%{_jvmdir}/java-icedtea
@@ -440,6 +452,7 @@ cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-activation_1.0.2_spec/1.
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-jaf-1.0.2-api.pom
 %add_to_maven_depmap org.apache.geronimo.specs geronimo-activation_1.0.2_spec 1.1 JPP geronimo-jaf-1.0.2-api
 
+%if %{with_corba}
 install -p -m 0644 geronimo-spec-corba-2.3/target/geronimo-corba_2.3_spec-1.1.jar \
       $RPM_BUILD_ROOT%{_javadir}/geronimo-corba-2.3-apis-%{version}.jar
 pushd $RPM_BUILD_ROOT%{_javadir}
@@ -466,6 +479,7 @@ popd
 cp $MAVEN_REPO_LOCAL/geronimo-spec/geronimo-spec-corba/1.0/geronimo-spec-corba-1.0.pom \
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-corba-1.0-apis.pom
 %add_to_maven_depmap geronimo-spec geronimo-spec-corba 1.0 JPP geronimo-corba-1.0-apis
+%endif
 
 install -p -m 0644 geronimo-spec-ejb/target/geronimo-ejb_2.1_spec-1.0.1.jar \
       $RPM_BUILD_ROOT%{_javadir}/geronimo-ejb-2.1-api-%{version}.jar
@@ -688,7 +702,11 @@ popd
 
 # javadoc
 install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+%if %{with_corba}
 for sp in activation commonj corba corba-2.3 corba-3.0 corba ejb j2ee-connector j2ee-deployment j2ee-management javamail jaxrpc jaxr jms jsp jta qname saaj servlet; do
+%else
+for sp in activation commonj ejb j2ee-connector j2ee-deployment j2ee-management javamail jaxrpc jaxr jms jsp jta qname saaj servlet; do
+%endif
     install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}/${sp}
     cp -pr geronimo-spec-${sp}/target/site/apidocs/* \
          $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}/${sp}
@@ -749,6 +767,7 @@ fi
 %{clean_gcjdb}
 %endif
 
+%if %{with_corba}
 %if %{gcj_support}
 %post -n geronimo-corba-1.0-apis
 %{update_gcjdb}
@@ -778,7 +797,7 @@ fi
 %postun -n geronimo-corba-3.0-apis
 %{clean_gcjdb}
 %endif
-
+%endif
 
 %triggerpostun -n geronimo-ejb-2.1-api -- ejb <= 0:2.1-3jpp_2rh
 # Remove file from old non-free packages
@@ -1091,6 +1110,7 @@ fi
 %attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-jaf-1.0.2-api-%{version}.jar.*
 %endif
 
+%if %{with_corba}
 %files -n geronimo-corba-1.0-apis
 %defattr(-,root,root,-)
 %{_javadir}/geronimo-corba-1.0-apis*.jar
@@ -1116,6 +1136,7 @@ fi
 %if %{gcj_support}
 %attr(-,root,root) %dir %{_libdir}/gcj/%{name}
 %attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-corba-3.0-apis-%{version}.jar.*
+%endif
 %endif
 
 %files -n geronimo-ejb-2.1-api
