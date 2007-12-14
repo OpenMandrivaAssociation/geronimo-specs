@@ -62,6 +62,7 @@ Patch4:        geronimo-nomockobjects-noscout-pom.patch
 Patch5:        geronimo-jms-nomockobjects-pom.patch
 Patch6:        geronimo-corba-jacorb-pom.patch
 Patch7:	       geronimo-specs-nocorba-pom.patch
+Patch8:	       geronimo-specs-nocorba-j2ee-pom.patch
 
 BuildRequires:  jpackage-utils >= 0:1.7.2
 BuildRequires:  java-1.7.0-icedtea
@@ -105,9 +106,9 @@ Requires: geronimo-jaf-1.0.2-api = %{version}-%{release}
 Requires: geronimo-corba-1.0-apis = %{version}-%{release}
 Requires: geronimo-corba-2.3-apis = %{version}-%{release}
 Requires: geronimo-corba-3.0-apis = %{version}-%{release}
+Requires: geronimo-j2ee-1.4-apis = %{version}-%{release}
 %endif
 Requires: geronimo-ejb-2.1-api = %{version}-%{release}
-Requires: geronimo-j2ee-1.4-apis = %{version}-%{release}
 Requires: geronimo-j2ee-connector-1.5-api = %{version}-%{release}
 Requires: geronimo-j2ee-deployment-1.1-api = %{version}-%{release}
 Requires: geronimo-jacc-1.0-api = %{version}-%{release}
@@ -189,6 +190,14 @@ Requires:       %{name}-poms = %{epoch}:%{version}-%{release}
 
 %description -n geronimo-corba-3.0-apis
 CORBA 3.0 Spec
+
+%package -n geronimo-j2ee-1.4-apis
+Summary:        J2EE v1.4 APIs
+Group:          Development/Java
+Requires:       %{name}-poms = %{epoch}:%{version}-%{release}
+
+%description -n geronimo-j2ee-1.4-apis
+J2EE Specification (the complete set in one jar)
 %endif
 
 %package -n geronimo-ejb-2.1-api
@@ -202,14 +211,6 @@ Requires(post): update-alternatives
 
 %description -n geronimo-ejb-2.1-api
 Enterprise JavaBeans Specification
-
-%package -n geronimo-j2ee-1.4-apis
-Summary:        J2EE v1.4 APIs
-Group:          Development/Java
-Requires:       %{name}-poms = %{epoch}:%{version}-%{release}
-
-%description -n geronimo-j2ee-1.4-apis
-J2EE Specification (the complete set in one jar)
 
 %package -n geronimo-j2ee-connector-1.5-api
 Summary:        J2EE Connector v1.5 API
@@ -390,6 +391,7 @@ ln -s %{_javadir} external_repo/JPP
 #%patch6 -b .sav
 %if !%{with_corba}
 %patch7 -b .sav3
+%patch8 -b .sav
 %endif
 
 %build
@@ -479,6 +481,15 @@ popd
 cp $MAVEN_REPO_LOCAL/geronimo-spec/geronimo-spec-corba/1.0/geronimo-spec-corba-1.0.pom \
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-corba-1.0-apis.pom
 %add_to_maven_depmap geronimo-spec geronimo-spec-corba 1.0 JPP geronimo-corba-1.0-apis
+
+install -p -m 0644 geronimo-spec-j2ee/target/geronimo-j2ee_1.4_spec-1.1.jar \
+      $RPM_BUILD_ROOT%{_javadir}/geronimo-j2ee-1.4-apis-%{version}.jar
+pushd $RPM_BUILD_ROOT%{_javadir}
+  ln -sf geronimo-j2ee-1.4-apis-%{version}.jar geronimo-j2ee-1.4-apis.jar
+popd
+cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-j2ee_1.4_spec/1.1/geronimo-j2ee_1.4_spec-1.1.pom \
+  $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-j2ee-1.4-apis.pom
+%add_to_maven_depmap org.apache.geronimo.specs geronimo-j2ee_1.4_spec 1.1 JPP geronimo-j2ee-1.4-apis
 %endif
 
 install -p -m 0644 geronimo-spec-ejb/target/geronimo-ejb_2.1_spec-1.0.1.jar \
@@ -568,14 +579,7 @@ cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-jaxrpc_1.1_spec/1.0.1/ge
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-jaxrpc-1.1-api.pom
 %add_to_maven_depmap org.apache.geronimo.specs geronimo-jaxrpc_1.1_spec 1.0.1 JPP geronimo-jaxrpc-1.1-api
 
-install -p -m 0644 geronimo-spec-j2ee/target/geronimo-j2ee_1.4_spec-1.1.jar \
-      $RPM_BUILD_ROOT%{_javadir}/geronimo-j2ee-1.4-apis-%{version}.jar
-pushd $RPM_BUILD_ROOT%{_javadir}
-  ln -sf geronimo-j2ee-1.4-apis-%{version}.jar geronimo-j2ee-1.4-apis.jar
-popd
-cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-j2ee_1.4_spec/1.1/geronimo-j2ee_1.4_spec-1.1.pom \
-  $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-j2ee-1.4-apis.pom
-%add_to_maven_depmap org.apache.geronimo.specs geronimo-j2ee_1.4_spec 1.1 JPP geronimo-j2ee-1.4-apis
+
 
 install -p -m 0644 geronimo-spec-jms/target/geronimo-jms_1.1_spec-1.0.1.jar \
       $RPM_BUILD_ROOT%{_javadir}/geronimo-jms-1.1-api-%{version}.jar
@@ -677,10 +681,10 @@ pushd $RPM_BUILD_ROOT%{_javadir}/geronimo
   ln -sf ../geronimo-j2ee-management-1.0-api-%{version}.jar \
     spec-j2ee-management-1.0-%{version}.jar
   ln -sf spec-j2ee-management-1.0-%{version}.jar spec-j2ee-management-1.0.jar
-
+%if %{with_corba}
   ln -sf ../geronimo-j2ee-1.4-apis-%{version}.jar spec-j2ee-1.4-%{version}.jar
   ln -sf spec-j2ee-1.4-%{version}.jar spec-j2ee-1.4.jar
-
+%endif
   ln -sf ../geronimo-jms-1.1-api-%{version}.jar spec-jms-1.1-%{version}.jar
   ln -sf spec-jms-1.1-%{version}.jar spec-jms-1.1.jar
 
@@ -719,10 +723,16 @@ ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 %{__perl} -pi -e 's/\r$//g' `find . -name LICENSE.txt` 
 
+%if %{with_corba}
 %if %{gcj_support}
 mv $RPM_BUILD_ROOT%{_javadir}/geronimo-j2ee-1.4-apis-%{version}.jar .
 %{_bindir}/aot-compile-rpm
 mv geronimo-j2ee-1.4-apis-%{version}.jar $RPM_BUILD_ROOT%{_javadir}/geronimo-j2ee-1.4-apis-%{version}.jar
+%endif
+%else
+%if %{gcj_support}
+%{_bindir}/aot-compile-rpm
+%endif
 %endif
 
 %clean
@@ -1137,6 +1147,15 @@ fi
 %attr(-,root,root) %dir %{_libdir}/gcj/%{name}
 %attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-corba-3.0-apis-%{version}.jar.*
 %endif
+
+%files -n geronimo-j2ee-1.4-apis
+%defattr(-,root,root,-)
+%{_javadir}/geronimo-j2ee-1.4-apis*.jar
+%doc geronimo-spec-j2ee/LICENSE.txt
+#%if %{gcj_support}
+#%attr(-,root,root) %dir %{_libdir}/gcj/%{name}
+#%attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-j2ee-1.4-apis-%{version}.jar.*
+#%endif
 %endif
 
 %files -n geronimo-ejb-2.1-api
@@ -1148,15 +1167,6 @@ fi
 %attr(-,root,root) %dir %{_libdir}/gcj/%{name}
 %attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-ejb-2.1-api-%{version}.jar.*
 %endif
-
-%files -n geronimo-j2ee-1.4-apis
-%defattr(-,root,root,-)
-%{_javadir}/geronimo-j2ee-1.4-apis*.jar
-%doc geronimo-spec-j2ee/LICENSE.txt
-#%if %{gcj_support}
-#%attr(-,root,root) %dir %{_libdir}/gcj/%{name}
-#%attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-j2ee-1.4-apis-%{version}.jar.*
-#%endif
 
 %files -n geronimo-j2ee-connector-1.5-api
 %defattr(-,root,root,-)
