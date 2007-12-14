@@ -146,7 +146,7 @@ Javadoc for %{name}.
 
 %package -n geronimo-commonj-1.1-apis
 Summary:        CommonJ APIs
-Group:          Development/Libraries/Java
+Group:          Development/Java
 Requires:       %{name}-poms = %{epoch}:%{version}-%{release}
 
 %description -n geronimo-commonj-1.1-apis
@@ -368,7 +368,7 @@ J2EE Servlet v2.4 API
 
 %package poms
 Summary:        POM files for geronimo-specs
-Group:          Development/Tools
+Group:          Development/Java
 Requires(post):   jpackage-utils >= 1.7.3
 Requires(postun): jpackage-utils >= 1.7.3
 
