@@ -40,6 +40,14 @@
                                                                                 
 Summary:        Geronimo J2EE server J2EE specifications
 URL:            http://geronimo.apache.org
+
+
+Name:           geronimo-specs
+Version:        1.1
+Release:        %mkrel 4.0.1
+Epoch:          0
+License:        Apache License
+Group:          Development/Java
 Source0:        %{name}-%{version}-src.tar.gz
 # svn export https://svn.apache.org/repos/asf/geronimo/specs/tags/1_1/
 
@@ -52,12 +60,6 @@ Patch4:        geronimo-nomockobjects-noscout-pom.patch
 Patch5:        geronimo-jms-nomockobjects-pom.patch
 Patch6:        geronimo-corba-jacorb-pom.patch
 
-Name:           geronimo-specs
-Version:        1.1
-Release:        %mkrel 4.0.1
-Epoch:          0
-License:        Apache License
-Group:          Development/Java
 BuildRequires:  jpackage-utils >= 0:1.7.2
 BuildRequires:  java-1.7.0-icedtea
 BuildRequires:  maven2 >= 0:2.0.4
