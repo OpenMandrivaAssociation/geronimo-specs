@@ -46,7 +46,7 @@ URL:            http://geronimo.apache.org
 
 Name:           geronimo-specs
 Version:        1.1
-Release:        %mkrel 4.0.1
+Release:        %mkrel 4.0.2
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -1047,6 +1047,7 @@ fi
 %endif
 
 %postun -n geronimo-qname-1.1-api
+if [ "$1" = "0" ]; then
   /usr/sbin/update-alternatives --remove qname %{_javadir}/geronimo-qname-1.1-api.jar
 fi
 %if %{gcj_support}
