@@ -77,7 +77,7 @@ BuildRequires:  maven2-plugin-resources
 BuildRequires:  maven2-plugin-surefire
 BuildRequires:  excalibur-avalon-logkit
 BuildRequires:  mojo-maven2-plugin-idlj
-BuildRequires:  jacorb >= 0:2.2.3
+#BuildRequires:  jacorb >= 0:2.2.3
 %if %{with_tests}
 BuildRequires:  junit >= 0:3.8.1
 BuildRequires:  mockobjects >= 0:0.09
