@@ -46,7 +46,7 @@ URL:            http://geronimo.apache.org
 
 Name:           geronimo-specs
 Version:        1.1
-Release:        %mkrel 4.0.2
+Release:        %mkrel 4.0.3
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -63,6 +63,7 @@ Patch5:        geronimo-jms-nomockobjects-pom.patch
 Patch6:        geronimo-corba-jacorb-pom.patch
 Patch7:	       geronimo-specs-nocorba-pom.patch
 Patch8:	       geronimo-specs-nocorba-j2ee-pom.patch
+Patch9:	       geronimo-specs-activation-version.patch
 
 BuildRequires:  jpackage-utils >= 0:1.7.2
 BuildRequires:  java-1.7.0-icedtea
@@ -392,6 +393,7 @@ ln -s %{_javadir} external_repo/JPP
 %if !%{with_corba}
 %patch7 -b .sav3
 %patch8 -b .sav
+%patch9 -b .sav4
 %endif
 
 %build
@@ -558,6 +560,7 @@ popd
 cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-javamail_1.3.1_spec/1.1/geronimo-javamail_1.3.1_spec-1.1.pom \
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-javamail-1.3.1-api.pom
 %add_to_maven_depmap org.apache.geronimo.specs geronimo-javamail_1.3.1_spec 1.1 JPP geronimo-javamail-1.3.1-api
+%add_to_maven_depmap javax.mail mail 1.3.1 JPP geronimo-javamail-1.3.1-api
 
 install -p -m 0644 geronimo-spec-jaxr/target/geronimo-jaxr_1.0_spec-1.0.1.jar \
       $RPM_BUILD_ROOT%{_javadir}/geronimo-jaxr-1.0-api-%{version}.jar
@@ -640,6 +643,7 @@ touch $RPM_BUILD_ROOT%{_javadir}/servlet.jar # for %ghost
 cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-servlet_2.4_spec/1.0.1/geronimo-servlet_2.4_spec-1.0.1.pom \
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-servlet-2.4-api.pom
 %add_to_maven_depmap org.apache.geronimo.specs geronimo-servlet_2.4_spec 1.0.1 JPP geronimo-servlet-2.4-api
+%add_to_maven_depmap javax.servlet servlet-api 2.4 JPP geronimo-servlet-2.4-api
 
 install -p -m 0644 geronimo-spec-commonj/target/geronimo-commonj_1.1_spec-1.0.jar \
       $RPM_BUILD_ROOT%{_javadir}/geronimo-commonj-1.1-apis-%{version}.jar
