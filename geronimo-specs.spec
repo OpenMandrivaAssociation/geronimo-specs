@@ -46,7 +46,7 @@ URL:            http://geronimo.apache.org
 
 Name:           geronimo-specs
 Version:        1.1
-Release:        %mkrel 4.0.3
+Release:        %mkrel 4.0.4
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -65,7 +65,7 @@ Patch7:	       geronimo-specs-nocorba-pom.patch
 Patch8:	       geronimo-specs-nocorba-j2ee-pom.patch
 Patch9:	       geronimo-specs-activation-version.patch
 
-BuildRequires:  jpackage-utils >= 0:1.7.2
+BuildRequires:  java-rpmbuild >= 0:1.7.2
 BuildRequires:  java-1.7.0-icedtea
 BuildRequires:  maven2 >= 0:2.0.4
 BuildRequires:  maven2-plugin-javadoc
