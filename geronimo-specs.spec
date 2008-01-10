@@ -46,7 +46,7 @@ URL:            http://geronimo.apache.org
 
 Name:           geronimo-specs
 Version:        1.1
-Release:        %mkrel 4.0.5
+Release:        %mkrel 4.0.6
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -926,20 +926,21 @@ fi
 %{clean_gcjdb}
 %endif
 
-# Do not provide it as this is just the API (is it?) and
-# our 'javamail' alternative means the providers as well
-# all in a single jar file called 'javamail.jar'
-%if %{gcj_support}
 %post -n geronimo-javamail-1.3.1-api
+%if %{gcj_support}
 %{update_gcjdb}
 %endif
 
-#%{_sbindir}/update-alternatives --install %{_javadir}/javamail.jar javamail %{_javadir}/geronimo-javamail-1.3.1-api.jar 10301
-#
-#%preun -n geronimo-javamail-1.3.1-api
-#if [ "$1" = "0" ]; then
-#    %{_sbindir}/update-alternatives --remove javamail %{_javadir}/geronimo-javamail-1.3.1-api.jar
-#fi
+# Do not provide it as this is just the API (is it?) and
+# our 'javamail' alternative means the providers as well
+# all in a single jar file called 'javamail.jar'
+# (walluck): providing as an alternative to classpathx-mail
+%{_sbindir}/update-alternatives --install %{_javadir}/javamail.jar javamail %{_javadir}/geronimo-javamail-1.3.1-api.jar 10301
+
+%preun -n geronimo-javamail-1.3.1-api
+if [ "$1" = "0" ]; then
+    %{_sbindir}/update-alternatives --remove javamail %{_javadir}/geronimo-javamail-1.3.1-api.jar
+fi
 
 %if %{gcj_support}
 %postun -n geronimo-javamail-1.3.1-api
