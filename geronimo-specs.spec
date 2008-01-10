@@ -46,7 +46,7 @@ URL:            http://geronimo.apache.org
 
 Name:           geronimo-specs
 Version:        1.1
-Release:        %mkrel 4.0.4
+Release:        %mkrel 4.0.5
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -451,6 +451,7 @@ pushd $RPM_BUILD_ROOT%{_javadir}
   ln -sf geronimo-jaf-1.0.2-api-%{version}.jar geronimo-jaf-1.0.2-api.jar
 popd
 touch $RPM_BUILD_ROOT%{_javadir}/jaf.jar # for %ghost
+touch $RPM_BUILD_ROOT%{_javadir}/activation.jar # for %ghost
 cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-activation_1.0.2_spec/1.1/geronimo-activation_1.0.2_spec-1.1.pom \
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-jaf-1.0.2-api.pom
 %add_to_maven_depmap org.apache.geronimo.specs geronimo-activation_1.0.2_spec 1.1 JPP geronimo-jaf-1.0.2-api
@@ -754,7 +755,8 @@ rm -f %{_javadir}/jaf.jar
 ln -s %{_sysconfdir}/alternatives/jaf %{_javadir}/jaf.jar
 
 %post -n geronimo-jaf-1.0.2-api
-/usr/sbin/update-alternatives --install %{_javadir}/jaf.jar jaf %{_javadir}/geronimo-jaf-1.0.2-api.jar 10002
+%{_sbindir}/update-alternatives --install %{_javadir}/jaf.jar jaf %{_javadir}/geronimo-jaf-1.0.2-api.jar 10002
+%{_sbindir}/update-alternatives --install %{_javadir}/activation.jar activation %{_javadir}/geronimo-jaf-1.0.2-api.jar 10002
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
@@ -762,7 +764,7 @@ ln -s %{_sysconfdir}/alternatives/jaf %{_javadir}/jaf.jar
 
 %preun -n geronimo-jaf-1.0.2-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove jaf %{_javadir}/geronimo-jaf-1.0.2-api.jar
+    %{_sbindir}/update-alternatives --remove jaf %{_javadir}/geronimo-jaf-1.0.2-api.jar
 fi
 
 %if %{gcj_support}
@@ -819,7 +821,7 @@ rm -f %{_javadir}/ejb.jar
 ln -s %{_sysconfdir}/alternatives/ejb %{_javadir}/ejb.jar
 
 %post -n geronimo-ejb-2.1-api
-/usr/sbin/update-alternatives --install %{_javadir}/ejb.jar ejb %{_javadir}/geronimo-ejb-2.1-api.jar 20100
+%{_sbindir}/update-alternatives --install %{_javadir}/ejb.jar ejb %{_javadir}/geronimo-ejb-2.1-api.jar 20100
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
@@ -827,7 +829,7 @@ ln -s %{_sysconfdir}/alternatives/ejb %{_javadir}/ejb.jar
 
 %preun -n geronimo-ejb-2.1-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove ejb %{_javadir}/geronimo-ejb-2.1-api.jar
+    %{_sbindir}/update-alternatives --remove ejb %{_javadir}/geronimo-ejb-2.1-api.jar
 fi
 %if %{gcj_support}
 %postun -n geronimo-ejb-2.1-api
@@ -842,14 +844,14 @@ rm -f %{_javadir}/j2ee-connector.jar
 ln -s %{_sysconfdir}/alternatives/j2ee-connector %{_javadir}/j2ee-connector.jar
 
 %post -n geronimo-j2ee-connector-1.5-api
-/usr/sbin/update-alternatives --install %{_javadir}/j2ee-connector.jar j2ee-connector %{_javadir}/geronimo-j2ee-connector-1.5-api.jar 10500
+%{_sbindir}/update-alternatives --install %{_javadir}/j2ee-connector.jar j2ee-connector %{_javadir}/geronimo-j2ee-connector-1.5-api.jar 10500
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-j2ee-connector-1.5-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove j2ee-connector %{_javadir}/geronimo-j2ee-connector-1.5-api.jar
+    %{_sbindir}/update-alternatives --remove j2ee-connector %{_javadir}/geronimo-j2ee-connector-1.5-api.jar
 fi
 
 %if %{gcj_support}
@@ -864,14 +866,14 @@ rm -f %{_javadir}/j2ee-deployment.jar
 ln -s %{_sysconfdir}/alternatives/j2ee-deployment %{_javadir}/j2ee-deployment.jar
 
 %post -n geronimo-j2ee-deployment-1.1-api
-/usr/sbin/update-alternatives --install %{_javadir}/j2ee-deployment.jar j2ee-deployment %{_javadir}/geronimo-j2ee-deployment-1.1-api.jar 10100
+%{_sbindir}/update-alternatives --install %{_javadir}/j2ee-deployment.jar j2ee-deployment %{_javadir}/geronimo-j2ee-deployment-1.1-api.jar 10100
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-j2ee-deployment-1.1-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove j2ee-deployment %{_javadir}/geronimo-j2ee-deployment-1.1-api.jar
+    %{_sbindir}/update-alternatives --remove j2ee-deployment %{_javadir}/geronimo-j2ee-deployment-1.1-api.jar
 fi
 
 %if %{gcj_support}
@@ -887,14 +889,14 @@ rm -f %{_javadir}/jacc.jar
 ln -s %{_sysconfdir}/alternatives/jacc %{_javadir}/jacc.jar
 
 %post -n geronimo-jacc-1.0-api
-/usr/sbin/update-alternatives --install %{_javadir}/jacc.jar jacc %{_javadir}/geronimo-jacc-1.0-api.jar 10000
+%{_sbindir}/update-alternatives --install %{_javadir}/jacc.jar jacc %{_javadir}/geronimo-jacc-1.0-api.jar 10000
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-jacc-1.0-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove jacc %{_javadir}/geronimo-jacc-1.0-api.jar
+    %{_sbindir}/update-alternatives --remove jacc %{_javadir}/geronimo-jacc-1.0-api.jar
 fi
 
 %if %{gcj_support}
@@ -909,14 +911,14 @@ rm -f %{_javadir}/j2ee-management.jar
 ln -s %{_sysconfdir}/alternatives/j2ee-management %{_javadir}/j2ee-management.jar
 
 %post -n geronimo-j2ee-management-1.0-api
-/usr/sbin/update-alternatives --install %{_javadir}/j2ee-management.jar j2ee-management %{_javadir}/geronimo-j2ee-management-1.0-api.jar 10000
+%{_sbindir}/update-alternatives --install %{_javadir}/j2ee-management.jar j2ee-management %{_javadir}/geronimo-j2ee-management-1.0-api.jar 10000
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-j2ee-management-1.0-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove j2ee-management %{_javadir}/geronimo-j2ee-management-1.0-api.jar
+    %{_sbindir}/update-alternatives --remove j2ee-management %{_javadir}/geronimo-j2ee-management-1.0-api.jar
 fi
 
 %if %{gcj_support}
@@ -932,11 +934,11 @@ fi
 %{update_gcjdb}
 %endif
 
-#/usr/sbin/update-alternatives --install %{_javadir}/javamail.jar javamail %{_javadir}/geronimo-javamail-1.3.1-api.jar 10301
+#%{_sbindir}/update-alternatives --install %{_javadir}/javamail.jar javamail %{_javadir}/geronimo-javamail-1.3.1-api.jar 10301
 #
 #%preun -n geronimo-javamail-1.3.1-api
 #if [ "$1" = "0" ]; then
-#    /usr/sbin/update-alternatives --remove javamail %{_javadir}/geronimo-javamail-1.3.1-api.jar
+#    %{_sbindir}/update-alternatives --remove javamail %{_javadir}/geronimo-javamail-1.3.1-api.jar
 #fi
 
 %if %{gcj_support}
@@ -951,14 +953,14 @@ rm -f %{_javadir}/jaxr.jar
 ln -s %{_sysconfdir}/alternatives/jaxr %{_javadir}/jaxr.jar
 
 %post -n geronimo-jaxr-1.0-api
-/usr/sbin/update-alternatives --install %{_javadir}/jaxr.jar jaxr %{_javadir}/geronimo-jaxr-1.0-api.jar 10000
+%{_sbindir}/update-alternatives --install %{_javadir}/jaxr.jar jaxr %{_javadir}/geronimo-jaxr-1.0-api.jar 10000
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-jaxr-1.0-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove jaxr %{_javadir}/geronimo-jaxr-1.0-api.jar
+    %{_sbindir}/update-alternatives --remove jaxr %{_javadir}/geronimo-jaxr-1.0-api.jar
 fi
 
 %if %{gcj_support}
@@ -967,14 +969,14 @@ fi
 %endif
 
 %post -n geronimo-jaxrpc-1.1-api
-/usr/sbin/update-alternatives --install %{_javadir}/jaxrpc.jar jaxrpc %{_javadir}/geronimo-jaxrpc-1.1-api.jar 10100
+%{_sbindir}/update-alternatives --install %{_javadir}/jaxrpc.jar jaxrpc %{_javadir}/geronimo-jaxrpc-1.1-api.jar 10100
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-jaxrpc-1.1-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove jaxrpc %{_javadir}/geronimo-jaxrpc-1.1-api.jar
+    %{_sbindir}/update-alternatives --remove jaxrpc %{_javadir}/geronimo-jaxrpc-1.1-api.jar
 fi
 
 %if %{gcj_support}
@@ -989,14 +991,14 @@ rm -f %{_javadir}/jms.jar
 ln -s %{_sysconfdir}/alternatives/jms %{_javadir}/jms.jar
 
 %post -n geronimo-jms-1.1-api
-/usr/sbin/update-alternatives --install %{_javadir}/jms.jar jms %{_javadir}/geronimo-jms-1.1-api.jar 10100
+%{_sbindir}/update-alternatives --install %{_javadir}/jms.jar jms %{_javadir}/geronimo-jms-1.1-api.jar 10100
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-jms-1.1-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove jms %{_javadir}/geronimo-jms-1.1-api.jar
+    %{_sbindir}/update-alternatives --remove jms %{_javadir}/geronimo-jms-1.1-api.jar
 fi
 
 %if %{gcj_support}
@@ -1006,14 +1008,14 @@ fi
 
 
 %post -n geronimo-jsp-2.0-api
-/usr/sbin/update-alternatives --install %{_javadir}/jsp.jar jsp %{_javadir}/geronimo-jsp-2.0-api.jar 20000
+%{_sbindir}/update-alternatives --install %{_javadir}/jsp.jar jsp %{_javadir}/geronimo-jsp-2.0-api.jar 20000
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-jsp-2.0-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove jsp %{_javadir}/geronimo-jsp-2.0-api.jar
+    %{_sbindir}/update-alternatives --remove jsp %{_javadir}/geronimo-jsp-2.0-api.jar
 fi
 
 %if %{gcj_support}
@@ -1028,14 +1030,14 @@ rm -f %{_javadir}/jta.jar
 ln -s %{_sysconfdir}/alternatives/jta %{_javadir}/jta.jar
 
 %post -n geronimo-jta-1.0.1B-api
-/usr/sbin/update-alternatives --install %{_javadir}/jta.jar jta %{_javadir}/geronimo-jta-1.0.1B-api.jar 10001
+%{_sbindir}/update-alternatives --install %{_javadir}/jta.jar jta %{_javadir}/geronimo-jta-1.0.1B-api.jar 10001
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-jta-1.0.1B-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove jta %{_javadir}/geronimo-jta-1.0.1B-api.jar
+    %{_sbindir}/update-alternatives --remove jta %{_javadir}/geronimo-jta-1.0.1B-api.jar
 fi
 
 %if %{gcj_support}
@@ -1044,39 +1046,39 @@ fi
 %endif
 
 %post -n geronimo-qname-1.1-api
-/usr/sbin/update-alternatives --install %{_javadir}/qname.jar qname %{_javadir}/geronimo-qname-1.1-api.jar 10100
+%{_sbindir}/update-alternatives --install %{_javadir}/qname.jar qname %{_javadir}/geronimo-qname-1.1-api.jar 10100
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %postun -n geronimo-qname-1.1-api
 if [ "$1" = "0" ]; then
-  /usr/sbin/update-alternatives --remove qname %{_javadir}/geronimo-qname-1.1-api.jar
+  %{_sbindir}/update-alternatives --remove qname %{_javadir}/geronimo-qname-1.1-api.jar
 fi
 %if %{gcj_support}
 %{clean_gcjdb}
 %endif
 
 %post -n geronimo-saaj-1.1-api
-/usr/sbin/update-alternatives --install %{_javadir}/saaj.jar saaj %{_javadir}/geronimo-saaj-1.1-api.jar 10100
+%{_sbindir}/update-alternatives --install %{_javadir}/saaj.jar saaj %{_javadir}/geronimo-saaj-1.1-api.jar 10100
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-saaj-1.1-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove saaj %{_javadir}/geronimo-saaj-1.1-api.jar
+    %{_sbindir}/update-alternatives --remove saaj %{_javadir}/geronimo-saaj-1.1-api.jar
 fi
 
 %post -n geronimo-servlet-2.4-api
-/usr/sbin/update-alternatives --install %{_javadir}/servlet.jar servlet %{_javadir}/geronimo-servlet-2.4-api.jar 20400
+%{_sbindir}/update-alternatives --install %{_javadir}/servlet.jar servlet %{_javadir}/geronimo-servlet-2.4-api.jar 20400
 %if %{gcj_support}
 %{update_gcjdb}
 %endif
 
 %preun -n geronimo-servlet-2.4-api
 if [ "$1" = "0" ]; then
-    /usr/sbin/update-alternatives --remove servlet %{_javadir}/geronimo-servlet-2.4-api.jar
+    %{_sbindir}/update-alternatives --remove servlet %{_javadir}/geronimo-servlet-2.4-api.jar
 fi
 
 %if %{gcj_support}
@@ -1119,6 +1121,7 @@ fi
 %{_javadir}/geronimo-jaf-1.0.2-api*.jar
 %doc geronimo-spec-activation/LICENSE.txt
 %ghost %{_javadir}/jaf.jar
+%ghost %{_javadir}/activation.jar
 %if %{gcj_support}
 %attr(-,root,root) %dir %{_libdir}/gcj/%{name}
 %attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-jaf-1.0.2-api-%{version}.jar.*
@@ -1304,5 +1307,3 @@ fi
 %attr(-,root,root) %dir %{_libdir}/gcj/%{name}
 %attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-servlet-2.4-api-%{version}.jar.*
 %endif
-
-
