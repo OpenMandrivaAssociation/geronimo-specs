@@ -46,7 +46,7 @@ URL:            http://geronimo.apache.org
 
 Name:           geronimo-specs
 Version:        1.1
-Release:        %mkrel 4.0.6
+Release:        %mkrel 4.0.7
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
