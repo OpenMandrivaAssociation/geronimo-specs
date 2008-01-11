@@ -268,7 +268,8 @@ Requires:       %{name}-poms = %{epoch}:%{version}-%{release}
 # our 'javamail' alternative means the providers as well
 # all in a single jar file called 'javamail.jar'
 # FIXME: figure out what to do with this
-#Provides:      javamail = 0:1.3.1
+# (walluck): provide this
+Provides:      javamail = 0:1.3.1
 
 %description -n geronimo-javamail-1.3.1-api
 JavaMail API
@@ -556,7 +557,8 @@ popd
 # Do not provide it as this is just the API (is it?) and
 # our 'javamail' alternative means the providers as well
 # all in a single jar file called 'javamail.jar'
-#touch $RPM_BUILD_ROOT%{_javadir}/javamail.jar # for %ghost
+# (walluck): provide this
+touch $RPM_BUILD_ROOT%{_javadir}/javamail.jar # for %ghost
 cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-javamail_1.3.1_spec/1.1/geronimo-javamail_1.3.1_spec-1.1.pom \
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-javamail-1.3.1-api.pom
 %add_to_maven_depmap org.apache.geronimo.specs geronimo-javamail_1.3.1_spec 1.1 JPP geronimo-javamail-1.3.1-api
@@ -1223,7 +1225,8 @@ fi
 # Do not provide it as this is just the API (is it?) and
 # our 'javamail' alternative means the providers as well
 # all in a single jar file called 'javamail.jar'
-#%ghost %{_javadir}/javamail.jar
+# (walluck): provide this
+%ghost %{_javadir}/javamail.jar
 %if %{gcj_support}
 %attr(-,root,root) %dir %{_libdir}/gcj/%{name}
 %attr(-,root,root) %{_libdir}/gcj/%{name}/geronimo-javamail-1.3.1-api-%{version}.jar.*
