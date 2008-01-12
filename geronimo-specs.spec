@@ -46,7 +46,7 @@ URL:            http://geronimo.apache.org
 
 Name:           geronimo-specs
 Version:        1.1
-Release:        %mkrel 4.0.7
+Release:        %mkrel 4.0.8
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -162,6 +162,8 @@ Requires:       %{name}-poms = %{epoch}:%{version}-%{release}
 #Obsoletes:    jaf
 Requires(preun): update-alternatives
 Requires(post): update-alternatives
+# (anssi) Conflicts with unalternativeszificated classpathx-jaf:
+Conflicts:	classpathx-jaf < 1.1.1-2.5.0
 
 %description -n geronimo-jaf-1.0.2-api
 Java Activation Framework
