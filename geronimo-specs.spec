@@ -50,6 +50,7 @@ Release:        %mkrel 4.0.8
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:        %{name}-%{version}-src.tar.gz
 # svn export https://svn.apache.org/repos/asf/geronimo/specs/tags/1_1/
 
