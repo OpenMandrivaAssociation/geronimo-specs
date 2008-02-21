@@ -46,7 +46,7 @@ URL:            http://geronimo.apache.org
 
 Name:           geronimo-specs
 Version:        1.1
-Release:        %mkrel 4.0.8
+Release:        %mkrel 4.0.9
 Epoch:          0
 License:        Apache License
 Group:          Development/Java
@@ -459,6 +459,7 @@ touch $RPM_BUILD_ROOT%{_javadir}/activation.jar # for %ghost
 cp $MAVEN_REPO_LOCAL/org/apache/geronimo/specs/geronimo-activation_1.0.2_spec/1.1/geronimo-activation_1.0.2_spec-1.1.pom \
   $RPM_BUILD_ROOT/%{_datadir}/maven2/poms/JPP-geronimo-jaf-1.0.2-api.pom
 %add_to_maven_depmap org.apache.geronimo.specs geronimo-activation_1.0.2_spec 1.1 JPP geronimo-jaf-1.0.2-api
+%add_to_maven_depmap javax.activation activation 1.0.2 JPP geronimo-activation-1.0.2-api
 
 %if %{with_corba}
 install -p -m 0644 geronimo-spec-corba-2.3/target/geronimo-corba_2.3_spec-1.1.jar \
