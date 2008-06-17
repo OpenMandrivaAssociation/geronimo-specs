@@ -28,7 +28,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-%define gcj_support 1
+%define gcj_support 0
 #needed because mojo-maven2-plugin-idlj is in contrib and geronimo in main 
 %define with_corba 0
 
@@ -66,8 +66,7 @@ Patch7:	       geronimo-specs-nocorba-pom.patch
 Patch8:	       geronimo-specs-nocorba-j2ee-pom.patch
 Patch9:	       geronimo-specs-activation-version.patch
 
-BuildRequires:  java-rpmbuild >= 0:1.7.2
-BuildRequires:  java-1.7.0-icedtea
+BuildRequires:  java-rpmbuild 
 BuildRequires:  maven2 >= 0:2.0.4
 BuildRequires:  maven2-plugin-javadoc
 BuildRequires:  maven-shared-file-management
@@ -400,7 +399,7 @@ ln -s %{_javadir} external_repo/JPP
 %endif
 
 %build
-export JAVA_HOME=%{_jvmdir}/java-icedtea
+export JAVA_HOME=%{_jvmdir}/java-rpmbuild
 
 # Mock objects is sort of a specia case  since it does not reside in 
 # /usr/share/java. So we install it manually via maven.
