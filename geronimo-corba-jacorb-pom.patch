@@ -1,0 +1,11 @@
+--- geronimo-spec-corba/pom.xml.sav	2006-06-06 11:12:24.000000000 +0300
++++ geronimo-spec-corba/pom.xml	2007-12-13 23:42:47.000000000 +0200
+@@ -31,7 +31,7 @@
+         </executions>
+         <configuration>
+           <debug>false</debug>
+-          <compiler>idlj</compiler>
++          <compiler>jacorb</compiler>
+           <sources>
+             <source>
+               <emitStubs>true</emitStubs>

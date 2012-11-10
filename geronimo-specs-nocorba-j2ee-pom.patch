@@ -1,0 +1,14 @@
+--- geronimo-spec-j2ee/pom.xml.sav	2006-06-06 11:12:24.000000000 +0300
++++ geronimo-spec-j2ee/pom.xml	2007-12-14 18:56:03.000000000 +0200
+@@ -99,11 +99,6 @@
+     </dependency>
+     <dependency>
+       <groupId>org.apache.geronimo.specs</groupId>
+-      <artifactId>geronimo-corba_2.3_spec</artifactId>
+-      <optional>true</optional>
+-    </dependency>
+-    <dependency>
+-      <groupId>org.apache.geronimo.specs</groupId>
+       <artifactId>geronimo-jms_1.1_spec</artifactId>
+       <optional>true</optional>
+     </dependency>

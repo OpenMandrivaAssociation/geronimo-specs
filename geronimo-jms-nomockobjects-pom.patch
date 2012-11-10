@@ -1,0 +1,20 @@
+--- geronimo-spec-jms/pom.xml.sav	2006-06-06 11:12:24.000000000 +0300
++++ geronimo-spec-jms/pom.xml	2007-12-13 23:25:31.000000000 +0200
+@@ -14,17 +14,4 @@
+     <developerConnection>scm:svn:http://svn.apache.org/repos/asf/geronimo/specs/trunk/geronimo-spec-jms/</developerConnection>
+     <url>http://svn.apache.org/viewcvs.cgi/geronimo/specs/trunk/geronimo-spec-jms/</url>
+   </scm>
+-
+-  <dependencies>
+-    <dependency>
+-      <groupId>mockobjects</groupId>
+-      <artifactId>mockobjects-core</artifactId>
+-      <scope>test</scope>
+-    </dependency>
+-    <dependency>
+-      <groupId>mockobjects</groupId>
+-      <artifactId>mockobjects-jdk1.4-j2ee1.3</artifactId>
+-      <scope>test</scope>
+-    </dependency>
+-  </dependencies>
+ </project>

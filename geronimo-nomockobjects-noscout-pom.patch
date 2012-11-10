@@ -1,0 +1,26 @@
+--- pom.xml.sav2	2007-12-13 23:12:37.000000000 +0200
++++ pom.xml	2007-12-13 23:19:40.000000000 +0200
+@@ -234,22 +234,7 @@
+         <artifactId>mx4j</artifactId>
+         <version>3.0.1</version>
+       </dependency>                        
+-      <dependency>
+-        <groupId>mockobjects</groupId>
+-        <artifactId>mockobjects-jdk1.4-j2ee1.3</artifactId>
+-        <version>0.09</version>
+-      </dependency>                              
+-      <dependency>
+-        <groupId>mockobjects</groupId>
+-        <artifactId>mockobjects-core</artifactId>
+-        <version>0.09</version>
+-      </dependency>                                    
+-      <dependency>
+-        <groupId>scout</groupId>
+-        <artifactId>scout</artifactId>
+-        <version>0.5</version>
+-      </dependency>                        
+-   </dependencies>
++    </dependencies>
+   </dependencyManagement>
+ 
+   <dependencies>

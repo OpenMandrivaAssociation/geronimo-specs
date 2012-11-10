@@ -1,0 +1,13 @@
+--- geronimo-spec-j2ee-management/pom.xml.sav	2006-09-09 17:29:26.000000000 +0200
++++ geronimo-spec-j2ee-management/pom.xml	2006-09-09 17:30:08.000000000 +0200
+@@ -30,8 +30,9 @@
+       </activation>
+       <dependencies>
+         <dependency>
+-          <groupId>mx4j</groupId>
++          <groupId>JPP/mx4j</groupId>
+           <artifactId>mx4j</artifactId>
++          <version>3.0.1</version>
+         </dependency>
+       </dependencies>
+     </profile>
