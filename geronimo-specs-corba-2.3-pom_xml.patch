@@ -1,0 +1,14 @@
+--- geronimo-spec-corba-2.3/pom.xml.orig	2008-07-11 16:04:50.713574621 -0400
++++ geronimo-spec-corba-2.3/pom.xml	2008-07-11 16:05:20.067522902 -0400
+@@ -50,6 +50,11 @@
+             <artifactId>jacorb-idl-compiler</artifactId>
+             <version>2.2.3</version>
+           </dependency>
++          <dependency>
++            <groupId>logkit</groupId>
++            <artifactId>logkit</artifactId>
++            <version>1.2.2</version>
++          </dependency>
+         </dependencies>
+       </plugin>
+     </plugins>

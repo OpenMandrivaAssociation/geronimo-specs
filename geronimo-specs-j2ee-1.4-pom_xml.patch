@@ -1,0 +1,40 @@
+--- geronimo-spec-j2ee/pom.xml.sav4	2006-09-09 05:41:50.000000000 +0200
++++ geronimo-spec-j2ee/pom.xml	2008-08-07 11:05:43.000000000 +0200
+@@ -2,12 +2,12 @@
+   <parent>
+     <artifactId>specs</artifactId>
+     <groupId>org.apache.geronimo.specs</groupId>
+-    <version>1.1.1</version>
++    <version>1.2</version>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+   <artifactId>geronimo-j2ee_1.4_spec</artifactId>
+   <name>J2EE</name>
+-  <version>${geronimoSpecsVersion}</version>
++  <version>1.2</version>
+   <packaging>pom</packaging>
+   
+   <scm>
+@@ -20,17 +20,11 @@
+     <plugins>
+       <plugin>
+         <artifactId>maven-assembly-plugin</artifactId>
+-        <executions>
+-            <execution>
+-                <phase>package</phase>
+-                <goals>
+-                    <goal>assembly</goal>
+-                </goals>
+-                <configuration>
+-                    <descriptor>src/main/assembly/j2ee.xml</descriptor>
+-                </configuration>
+-            </execution>
+-        </executions>
++        <configuration>
++          <descriptorRefs>
++            <descriptorRef>jar-with-dependencies</descriptorRef>
++          </descriptorRefs>
++        </configuration>
+       </plugin>
+     </plugins>
+   </build>
