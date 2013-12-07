@@ -41,7 +41,7 @@
 
 Name:           geronimo-specs
 Version:        1.2
-Release:        5
+Release:        6
 Epoch:          0
 Summary:        Geronimo J2EE server J2EE specifications
 Url:            http://geronimo.apache.org
