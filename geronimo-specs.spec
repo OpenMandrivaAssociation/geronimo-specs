@@ -3,7 +3,7 @@ Version:        1.2
 Release:        9
 Epoch:          0
 Summary:        Dead package
-Url:            http://geronimo.apache.org
+Url:            https://geronimo.apache.org
 License:        Apache License
 Group:          Development/Java
 
